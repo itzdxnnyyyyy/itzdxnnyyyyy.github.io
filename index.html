@@ -1,7 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWI Station Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <div class="container">
+        <h1>SWI Station Calculator</h1>
+        
+        <div class="main-controls">
+            <div class="control-group">
+                <label for="module-dropdown">Select Module:</label>
+                <select id="module-dropdown">
+                    <option value="Pick a Module">Pick a Module</option>
+                    <!-- Modules will be populated by JavaScript -->
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="filter-dropdown">Module Filter:</label>
+                <select id="filter-dropdown">
+                    <option value="No Filter">No Filter</option>
+                    <option value="Imperial">Imperial</option>
+                    <option value="Sith">Sith</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="quantity-input">Quantity:</label>
+                <input type="number" id="quantity-input" value="1" min="1">
+            </div>
+            
+            <div class="control-group">
+                <label for="sunlight-input">Sunlight Percentage:</label>
+                <input type="number" id="sunlight-input" value="100" min="1" max="400">
+            </div>
+            
+            <div class="control-group checkbox-group">
+                <input type="checkbox" id="advanced-checkbox">
+                <label for="advanced-checkbox">Toggle Advanced View</label>
+            </div>
+            
+            <button id="calculate-button">Calculate Requirements</button>
+            
+            <div class="control-group">
+                <button id="color-scheme-button">Color Scheme: Coloured</button>
+            </div>
+        </div>
+        
+        <div class="results-container">
+            <div class="results-panel">
+                <h3>Modules needed in the Chain:</h3>
+                <div id="results-text" class="results-text"></div>
+            </div>
+            
+            <div class="results-panel">
+                <h3>Raw Resources:</h3>
+                <div id="results2-text" class="results-text"></div>
+            </div>
+        </div>
+        
+        <div class="results-panel">
+            <h3>Total Wares Produced Hourly:</h3>
+            <div id="total-text" class="results-text"></div>
+        </div>
+        
+        <div id="advanced-container" class="advanced-container hidden">
+            <div class="advanced-panel">
+                <h3>Demand Breakdown:</h3>
+                <div id="advanced-text" class="advanced-text"></div>
+            </div>
+            
+            <div class="advanced-panel">
+                <h3>Storage Requirements Breakdown:</h3>
+                <div id="advanced-text2" class="advanced-text"></div>
+            </div>
+            
+            <div class="advanced-panel">
+                <h3>Storage per Ware:</h3>
+                <div id="advanced-text3" class="advanced-text"></div>
+            </div>
+            
+            <div class="advanced-panel">
+                <h3>Surplus/Deficit Breakdown:</h3>
+                <div id="advanced-text4" class="advanced-text"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
 </body>
 </html>

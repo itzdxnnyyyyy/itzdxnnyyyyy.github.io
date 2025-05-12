@@ -3,93 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SWI Station Calculator</title>
+    <title>Unit and Trait Management</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <h1>Unit and Trait Management</h1>
+    </header>
+
     <div class="container">
-        <h1>SWI Station Calculator</h1>
-        
-        <div class="main-controls">
-            <div class="control-group">
-                <label for="module-dropdown">Select Module:</label>
-                <select id="module-dropdown">
-                    <option value="Pick a Module">Pick a Module</option>
-                    <!-- Modules will be populated by JavaScript -->
+        <!-- Unit Section -->
+        <div id="unit-form">
+            <h2>Add Unit</h2>
+            <form id="unitForm">
+                <label for="unitName">Unit Name:</label>
+                <input type="text" id="unitName" required>
+
+                <label for="unitHp">HP:</label>
+                <input type="number" id="unitHp" required>
+
+                <label for="unitDmg">Damage:</label>
+                <input type="number" id="unitDmg" required>
+
+                <label for="unitCount">Count:</label>
+                <input type="number" id="unitCount" required>
+
+                <label for="unitTagsSelect">Unit Tags:</label>
+                <select id="unitTagsSelect" multiple>
+                    <!-- Options will be populated here -->
                 </select>
-            </div>
-            
-            <div class="control-group">
-                <label for="filter-dropdown">Module Filter:</label>
-                <select id="filter-dropdown">
-                    <option value="No Filter">No Filter</option>
-                    <option value="Imperial">Imperial</option>
-                    <option value="Sith">Sith</option>
+
+                <button type="button" onclick="addUnit()">Add Unit</button>
+            </form>
+
+            <h3>Unit List</h3>
+            <ul id="unitList">
+                <!-- Unit list will be populated here -->
+            </ul>
+        </div>
+
+        <!-- Trait Section -->
+        <div id="trait-form">
+            <h2>Add Trait</h2>
+            <form id="traitForm">
+                <label for="traitName">Trait Name:</label>
+                <input type="text" id="traitName" required>
+
+                <label for="traitHpBonus">HP Bonus (%):</label>
+                <input type="number" id="traitHpBonus" required>
+
+                <label for="traitDmgBonus">Damage Bonus (%):</label>
+                <input type="number" id="traitDmgBonus" required>
+
+                <label for="traitTagsSelect">Trait Tags:</label>
+                <select id="traitTagsSelect" multiple>
+                    <!-- Options will be populated here -->
                 </select>
-            </div>
-            
-            <div class="control-group">
-                <label for="quantity-input">Quantity:</label>
-                <input type="number" id="quantity-input" value="1" min="1">
-            </div>
-            
-            <div class="control-group">
-                <label for="sunlight-input">Sunlight Percentage:</label>
-                <input type="number" id="sunlight-input" value="100" min="1" max="400">
-            </div>
-            
-            <div class="control-group checkbox-group">
-                <input type="checkbox" id="advanced-checkbox">
-                <label for="advanced-checkbox">Toggle Advanced View</label>
-            </div>
-            
-            <button id="calculate-button">Calculate Requirements</button>
-            
-            <div class="control-group">
-                <button id="color-scheme-button">Color Scheme: Coloured</button>
-            </div>
+
+                <button type="button" onclick="addTrait()">Add Trait</button>
+            </form>
+
+            <h3>Trait List</h3>
+            <ul id="traitList">
+                <!-- Trait list will be populated here -->
+            </ul>
         </div>
-        
-        <div class="results-container">
-            <div class="results-panel">
-                <h3>Modules needed in the Chain:</h3>
-                <div id="results-text" class="results-text"></div>
-            </div>
-            
-            <div class="results-panel">
-                <h3>Raw Resources:</h3>
-                <div id="results2-text" class="results-text"></div>
-            </div>
+
+        <!-- Simulation Section -->
+        <div id="simulation">
+            <h2>Run Simulation</h2>
+            <label for="selectedUnit">Select Unit:</label>
+            <select id="selectedUnit">
+                <!-- Options will be populated here -->
+            </select>
+
+            <label for="traitSelect">Select Traits:</label>
+            <select id="traitSelect" multiple>
+                <!-- Options will be populated here -->
+            </select>
+
+            <button type="button" onclick="runSimulation()">Run Simulation</button>
+
+            <div id="result"></div>
         </div>
-        
-        <div class="results-panel">
-            <h3>Total Wares Produced Hourly:</h3>
-            <div id="total-text" class="results-text"></div>
-        </div>
-        
-        <div id="advanced-container" class="advanced-container hidden">
-            <div class="advanced-panel">
-                <h3>Demand Breakdown:</h3>
-                <div id="advanced-text" class="advanced-text"></div>
-            </div>
-            
-            <div class="advanced-panel">
-                <h3>Storage Requirements Breakdown:</h3>
-                <div id="advanced-text2" class="advanced-text"></div>
-            </div>
-            
-            <div class="advanced-panel">
-                <h3>Storage per Ware:</h3>
-                <div id="advanced-text3" class="advanced-text"></div>
-            </div>
-            
-            <div class="advanced-panel">
-                <h3>Surplus/Deficit Breakdown:</h3>
-                <div id="advanced-text4" class="advanced-text"></div>
-            </div>
-        </div>
+    <div id="unitEditPopup" class="popup">
+        <h2>Edit Unit</h2>
+        <label for="editUnitName">Unit Name:</label>
+        <input type="text" id="editUnitName">
+
+        <label for="editUnitHp">HP:</label>
+        <input type="number" id="editUnitHp">
+
+        <label for="editUnitDmg">Damage:</label>
+        <input type="number" id="editUnitDmg">
+
+        <label for="editUnitCount">Count:</label>
+        <input type="number" id="editUnitCount">
+
+        <label for="editUnitTags">Unit Tags:</label>
+        <div id="editUnitTags"></div>
+
+        <button type="button" onclick="saveUnitChanges()">Save Changes</button>
+        <button type="button" onclick="closePopup()">Close</button>
     </div>
-    
+
+    <div id="traitEditPopup" class="popup">
+        <h2>Edit Trait</h2>
+        <label for="editTraitName">Trait Name:</label>
+        <input type="text" id="editTraitName">
+
+        <label for="editTraitHpBonus">HP Bonus (%):</label>
+        <input type="number" id="editTraitHpBonus">
+
+        <label for="editTraitDmgBonus">Damage Bonus (%):</label>
+        <input type="number" id="editTraitDmgBonus">
+
+        <button type="button" onclick="saveTraitChanges()">Save Changes</button>
+        <button type="button" onclick="closePopup()">Close</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
